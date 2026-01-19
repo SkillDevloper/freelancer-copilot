@@ -2,6 +2,13 @@
 
 A private AI assistant for freelance web developers to analyze client messages from platforms like Fiverr and Upwork.
 
+## 📸 Screenshots
+
+### GUI Interface
+![GUI Screenshot](https://github.com/SkillDevloper/freelancer-copilot/blob/main/Images/Screenshot%202026-01-09%20190750.jpg?raw=true)
+![GUI Screenshot](https://github.com/SkillDevloper/freelancer-copilot/blob/main/Images/screencapture-localhost-8080-2026-01-09-19_36_02.png?raw=true)
+![GUI Screenshot](https://github.com/SkillDevloper/freelancer-copilot/blob/main/Images/screencapture-localhost-8080-2026-01-09-19_39_43.png?raw=true)
+
 ## 🎯 Purpose
 
 This is **NOT** a client-facing chatbot. It's an internal tool that helps freelancers:
@@ -178,4 +185,5 @@ Choose either OpenAI or Google Gemini in `.env`:
 - Protecting your sensitive information
 
 ### Credits
+
 Built for freelance web developers who want to work smarter, not harder.
