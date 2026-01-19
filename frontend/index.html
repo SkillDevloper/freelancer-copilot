@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelancer Copilot 🤖</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1><i class="fas fa-robot"></i> Freelancer Copilot</h1>
+                <p class="subtitle">Your private AI assistant for client communication</p>
+                <div class="status-indicator">
+                    <span class="status-dot" id="statusDot"></span>
+                    <span id="statusText">Connecting...</span>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section class="input-section">
+                <div class="input-header">
+                    <h2><i class="fas fa-paste"></i> Paste Buyer Message</h2>
+                    <div class="input-actions">
+                        <button id="clearBtn" class="btn-secondary">
+                            <i class="fas fa-eraser"></i> Clear
+                        </button>
+                        <button id="exampleBtn" class="btn-secondary">
+                            <i class="fas fa-lightbulb"></i> Load Example
+                        </button>
+                    </div>
+                </div>
+                
+                <textarea id="messageInput" 
+                          placeholder="Paste the buyer message from Fiverr/Upwork here...&#10;&#10;Example: 'Hi, I need a WordPress website urgently. Contact me on WhatsApp for details.'"
+                          rows="8"></textarea>
+                
+                <div class="input-footer">
+                    <div class="char-counter">
+                        <span id="charCount">0</span> characters
+                    </div>
+                    <button id="analyzeBtn" class="btn-primary">
+                        <i class="fas fa-magic"></i> Analyze Message
+                    </button>
+                </div>
+            </section>
+
+            <section class="output-section" id="outputSection" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-chart-bar"></i> Analysis Results</h2>
+                    <div class="analysis-meta">
+                        <span id="analysisTime"></span>
+                        <button id="copyAllBtn" class="btn-secondary btn-small">
+                            <i class="fas fa-copy"></i> Copy All
+                        </button>
+                    </div>
+                </div>
+
+                <div class="cards-container">
+                    <!-- Risk Card -->
+                    <div class="card risk-card" id="riskCard">
+                        <div class="card-header">
+                            <h3><i class="fas fa-exclamation-triangle"></i> Risk Assessment</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="risk-badge" id="riskBadge">LOW</div>
+                            <p id="riskReason" class="risk-reason">No analysis performed yet</p>
+                        </div>
+                    </div>
+
+                    <!-- Guidance Card -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-comments"></i> Internal Guidance (Hinglish)</h3>
+                            <button class="copy-btn" data-target="guidanceContent">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div id="guidanceContent" class="content-box">
+                                <p class="placeholder">Analysis will appear here...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reply Card -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-reply"></i> Ready-to-Send Reply</h3>
+                            <div>
+                                <button class="copy-btn" data-target="replyContent">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                                <button id="copyReplyBtn" class="copy-btn btn-success">
+                                    <i class="fas fa-paper-plane"></i> Copy & Close
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="replyContent" class="content-box reply-box">
+                                <p class="placeholder">Suggested reply will appear here...</p>
+                            </div>
+                            <div class="reply-actions">
+                                <small>This reply is platform-safe and professionally formatted</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="disclaimer">
+                    <p><i class="fas fa-info-circle"></i> <strong>Disclaimer:</strong> This tool provides suggestions only. Always review and adapt responses to your specific situation. Never share sensitive information or violate platform policies.</p>
+                </div>
+            </section>
+
+            <section class="history-section" id="historySection">
+                <h2><i class="fas fa-history"></i> Recent Analysis</h2>
+                <div id="historyList">
+                    <p class="empty-history">No recent analysis. Your analysis history will appear here.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <p>Freelancer Copilot v1.0 • Private AI Assistant for Freelancers</p>
+                <p class="footer-links">
+                    <a href="#" id="settingsBtn"><i class="fas fa-cog"></i> Settings</a>
+                    <a href="#" id="helpBtn"><i class="fas fa-question-circle"></i> Help</a>
+                    <a href="#" id="privacyBtn"><i class="fas fa-shield-alt"></i> Privacy</a>
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modals -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-cog"></i> Settings</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="apiEndpoint">Backend API URL:</label>
+                    <input type="text" id="apiEndpoint" value="http://localhost:3000">
+                    <small>Change this if you've deployed the backend elsewhere</small>
+                </div>
+                <div class="form-group">
+                    <label for="enableHistory">Enable Analysis History:</label>
+                    <input type="checkbox" id="enableHistory" checked>
+                </div>
+                <div class="form-group">
+                    <label for="autoCopy">Auto-copy reply after analysis:</label>
+                    <input type="checkbox" id="autoCopy">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="saveSettingsBtn" class="btn-primary">Save Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
